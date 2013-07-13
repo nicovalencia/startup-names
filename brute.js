@@ -44,13 +44,14 @@ _.each(names, function(name) {
       chain.push(value);
       pointer = null;
     } else {
-      var finalChain = _.reject(chain, function(item, i) { return i % 2 === 1; });
+      if(bestChains.length < 10 || chain.length / 2 >= bestChains[9].length) {
+        var finalChain = _.reject(chain, function(item, i) { return i % 2 === 1; });
 
-      console.log(JSON.stringify(finalChain));
+        console.log(JSON.stringify(finalChain));
 
-      bestChains.push(finalChain);
-      bestChains = _.sortBy(bestChains, 'length').reverse().slice(0, 5);
-
+        bestChains.push(finalChain);
+        bestChains = _.sortBy(bestChains, 'length').reverse().slice(0, 10);
+      }
       pointer = chain.pop();
     }
   }
