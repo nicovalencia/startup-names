@@ -36,11 +36,10 @@ console.log(process.memoryUsage());
 var index = {};
 var chain = ["Quick Left"];
 var maxChain = [];
+var total = 0, totalCount = 0;
 
 var count = 0;
 while(true) {
-  count++;
-
   if(chain.length < 1) {
     chain.push(sample(Object.keys(step)));
   }
@@ -52,6 +51,9 @@ while(true) {
     chain.push(next);
     index[next] = true;
   } else {
+    count++;
+    total += chain.length;
+
     if(chain.length > maxChain.length) {
       console.log('New best chain of length ' + chain.length);
       console.log(chain);
@@ -66,6 +68,9 @@ while(true) {
   }
 
   if(count % 1000 == 0) {
-    console.log('Iteration: ', count);
+    count++;
+    console.log('Chains: ', count);
+    console.log('Average length: ', total / 999);
+    total = 0;
   }
 }
