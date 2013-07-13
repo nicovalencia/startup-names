@@ -12,3 +12,4 @@ Install Node.js & NPM, then:
 `npm install`
 `node scrape.js` - will run the scraper against CrunchBase's company index.
 `node words.js` - will create a words.json file from `/usr/share/dict/words`.
+`node split.js` - will create a nodes.json file by analyzing `names.json` and `words.json`.
