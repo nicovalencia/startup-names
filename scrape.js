@@ -17,7 +17,7 @@ characters.forEach(function(character) {
       names.push($(link).text());
     });
 
-    fs.writeFile("./names/"+character+".json", JSON.stringify(names), function(err) {
+    fs.writeFile("./data/names/"+character+".json", JSON.stringify(names), function(err) {
       if(err) {
         console.log(err);
       } else {

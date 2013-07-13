@@ -11,3 +11,4 @@ Node.js/NPM
 
 `npm install`
 `node scrape.js` - will run the scraper against CrunchBase's company index.
+`node words.js` - will create a words.json file from `/usr/share/dict/words`.
