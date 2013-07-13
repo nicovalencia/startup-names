@@ -26,7 +26,7 @@ async.concat(characters, function(character, callback) {
     return;
   }
 
-  fs.writeFile('./data/names.json', JSON.stringify(names), function(err) {
+  fs.writeFile('./data/names.json', JSON.stringify(names, null, '  '), function(err) {
     if(err) {
       console.warn(err);
     } else {
