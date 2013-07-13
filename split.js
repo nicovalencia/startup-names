@@ -15,7 +15,7 @@ async.concat(names, function(name, callback) {
   for(var i = 3; i < name.length - 2; i++) {
     var prefix = name.slice(0, i);
     if(wordsMap[prefix]) {
-      for(var j = i + 3; j < name.length - 2; j++) {
+      for(var j = i; j < name.length - 2; j++) {
         var suffix = name.slice(j, name.length);
         if(wordsMap[suffix]) {
           nodes.push({
