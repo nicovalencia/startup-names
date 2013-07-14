@@ -4,8 +4,8 @@ var _ = require('lodash');
 
 var DATA_DIR = process.env.DATA_DIR || './data';
 
-var words = require(path.join(process.cwd, DATA_DIR, 'words.json'));
-var names = require(path.join(process.cwd, DATA_DIR, 'names.json'));
+var words = require(path.join(process.cwd(), DATA_DIR, 'words.json'));
+var names = require(path.join(process.cwd(), DATA_DIR, 'names.json'));
 
 var wordsMap = {};
 
@@ -14,9 +14,8 @@ words.forEach(function(word) {
 });
 
 var nodes = [];
-_.each(names, function(name) {
-  var words = name.split(/\s+/);
-
+_.each(names, function(original) {
+  var name = original.toLowerCase();
   var prefixes = [], suffixes = [];
 
   for(var i = 3; i <= name.length; i++) {
@@ -30,12 +29,12 @@ _.each(names, function(name) {
   }
 
   var node = {
-    name: name,
+    name: original,
     prefixes: prefixes,
     suffixes: suffixes
   }
 
-  nodes.push(node);
+  if(node.prefixes.length > 0 && node.suffixes.length > 0) nodes.push(node);
 });
 
 fs.writeFile(path.join(DATA_DIR, 'nodes.json'), JSON.stringify(nodes, null, '  '), function(err) {

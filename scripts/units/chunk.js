@@ -1,14 +1,19 @@
+var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
 
 var DATA_DIR = process.env.DATA_DIR || './data';
 var LENGTH = 3;
 
-var graph = require(path.join(process.cwd, DATA_DIR, 'graph.json'));
+var graph = require(path.join(process.cwd(), DATA_DIR, 'graph.json'));
 
 var units = [];
 
-_.eac(Object.keys(graph), function(name) {
+var names = Object.keys(graph);
+var count = names.length;
+_.each(Object.keys(graph), function(name, i) {
+  console.log(i + '/' + count + ' : ' + name);
+
   var pointer = null
   var chain = [name];
 
@@ -19,7 +24,7 @@ _.eac(Object.keys(graph), function(name) {
     var next = nexts[nexts.indexOf(pointer) + 1]
 
     if(next) {
-      if(chain.indexOf(next) < 0) {
+      if(chain.indexOf(next) >= 0) {
         pointer = next;
       } else {
         chain.push(next);
@@ -28,7 +33,7 @@ _.eac(Object.keys(graph), function(name) {
         if(chain.length >= LENGTH) {
           units.push({
             id: units.length,
-            chain: chain.slice();
+            chain: chain.slice()
           });
 
           pointer = chain.pop();

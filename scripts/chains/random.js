@@ -18,13 +18,6 @@ function overlap(a, b) {
 }
 
 while(unit = support.nextUnit()) {
-  unit.stats = {
-    cacheHits: 0,
-    cacheMisses: 0,
-    deadEnds: 0,
-    loops: 0
-  };
-
   var pointer = null;
   var start = unit.chain.length;
   var chain = []
