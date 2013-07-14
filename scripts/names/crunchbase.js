@@ -2,6 +2,10 @@ var async = require('async');
 var cheerio = require('cheerio');
 var request = require('request');
 var fs = require('fs');
+var path = require('path');
+
+var DATA_DIR = process.env.DATA_PATH || './data';
+
 var characters = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "other" ];
 
 async.concat(characters, function(character, callback) {
@@ -26,11 +30,11 @@ async.concat(characters, function(character, callback) {
     return;
   }
 
-  fs.writeFile('./data/names.json', JSON.stringify(names, null, '  '), function(err) {
+  fs.writeFile(path.join(DATA_DIR, 'names.json'), JSON.stringify(names, null, '  '), function(err) {
     if(err) {
       console.warn(err);
     } else {
-      console.log('Startup names saved to data/names.json');
+      console.log('Startup names saved to names.json');
     }
   });
 });

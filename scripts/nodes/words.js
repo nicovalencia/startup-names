@@ -1,7 +1,11 @@
+var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
-var words = require('./data/words.json');
-var names = require('./data/names.json');
+
+var DATA_DIR = process.env.DATA_DIR || './data';
+
+var words = require(path.join(process.cwd, DATA_DIR, 'words.json'));
+var names = require(path.join(process.cwd, DATA_DIR, 'names.json'));
 
 var wordsMap = {};
 
@@ -34,10 +38,10 @@ _.each(names, function(name) {
   nodes.push(node);
 });
 
-fs.writeFile('./data/nodes-v2.json', JSON.stringify(nodes, null, '  '), function(err) {
+fs.writeFile(path.join(DATA_DIR, 'nodes.json'), JSON.stringify(nodes, null, '  '), function(err) {
   if(err) {
     console.warn(err);
   } else {
-    console.log(nodes.length, ' nodes written to ./data/nodes-v2.json');
+    console.log(nodes.length, ' nodes written to nodes.json');
   }
 });
